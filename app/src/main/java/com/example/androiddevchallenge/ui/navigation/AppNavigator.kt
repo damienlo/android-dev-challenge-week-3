@@ -23,7 +23,7 @@ enum class Screen {
 
 @Composable
 fun AppNavigator() {
-    var screen: Screen by rememberSaveable { mutableStateOf(Screen.Home) }
+    var screen: Screen by rememberSaveable { mutableStateOf(Screen.SplashScreen) }
     Surface(modifier = Modifier.fillMaxSize()) {
         Crossfade(screen) { currentScreen ->
             when (currentScreen) {
