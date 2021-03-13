@@ -22,15 +22,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import com.example.androiddevchallenge.ui.navigation.AppNavigator
 import com.example.androiddevchallenge.ui.theme.MySootheTheme
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             MySootheTheme {
-                MyApp()
+                ProvideWindowInsets {
+                    MyApp()
+                }
             }
         }
     }
