@@ -2,6 +2,7 @@ package com.example.androiddevchallenge.ui.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -21,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.MyApp
 import com.example.androiddevchallenge.R
+import com.example.androiddevchallenge.ui.components.MySoothButton
 import com.example.androiddevchallenge.ui.theme.MySootheTheme
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import java.util.*
@@ -33,8 +35,10 @@ fun SplashScreen(navigateToNextScreen: () -> Unit) {
             .navigationBarsPadding()
             .background(MaterialTheme.colors.background)
     ) {
+        val backgroundImageResId =
+            if (isSystemInDarkTheme()) R.drawable.dark_welcome else R.drawable.light_welcome
         Image(
-            painter = painterResource(id = R.drawable.light_welcome),
+            painter = painterResource(id = backgroundImageResId),
             contentDescription = "background image",
             modifier = Modifier
                 .fillMaxWidth()
@@ -60,33 +64,17 @@ fun SplashScreen(navigateToNextScreen: () -> Unit) {
             )
 
             Spacer(modifier = Modifier.height(32.dp))
-            Button(
-                onClick = navigateToNextScreen,
-                shape = MaterialTheme.shapes.medium,
-                modifier = Modifier
-                    .height(72.dp)
-                    .fillMaxWidth(),
-            ) {
-                Text(
-                    stringResource(id = R.string.splash_screen_button_sign_up),
-                    style = MaterialTheme.typography.button
-                )
-            }
+            MySoothButton(
+                text = stringResource(id = R.string.splash_screen_button_sign_up),
+                onClick = navigateToNextScreen
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
-            Button(
+            MySoothButton(
+                text = stringResource(id = R.string.splash_screen_button_log_in),
                 onClick = navigateToNextScreen,
-                shape = MaterialTheme.shapes.medium,
-                modifier = Modifier
-                    .height(72.dp)
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
-            ) {
-                Text(
-                    stringResource(id = R.string.splash_screen_button_log_in),
-                    style = MaterialTheme.typography.button
-                )
-            }
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+            )
         }
     }
 }
